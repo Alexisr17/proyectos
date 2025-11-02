@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Estudiantil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>&#x1F4DA; Registro de Estudiantes</h1>
+            <span class="contador-estudiantes" id="contador-estudiantes">0 Estudiantes</span>
+        </div>
+
+        <div class="formulario">
+            <h2>Formulario estudiante</h2>
+            <div class="campos">
+                <label for="nombre" id="label-nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ingrese el nombre">
+            </div>
+
+            <div class="campos">
+                <label for="apellido" id="label-apellido">Apellido:</label>
+                <input type="text" id="apellido" placeholder="Ingrese el apellido" required>
+            </div>
+
+            <div class="campos">
+                <label for="edad">Edad:</label>
+                <input type="number" id="edad" placeholder="Ingrese la edad" required>
+            </div>
+            
+            <div class="campos">
+                <label for="email" id="label-email">Email:</label>
+                <input type="email" id="email" placeholder="Ingrese el email" required>
+            </div>
+
+            <div class="campos">
+                <label for="carrera">Carrera:</label>
+                <select id="carrera">
+                    <option value="Ingeniería en sistemas">Ingeniería en sistemas</option>
+                    <option value="ingeniero industrial">Ingeniero industrial</option>
+                    <option value="Derecho">Derecho</option>
+                    <option value="Arquitectura">Arquitectura</option>
+                    <option value="Psicología">Psicología</option>
+                </select>
+            </div>
+
+            <div class="forms-actions">
+                <button class="btn btn_1" id="btnAgregar">Agregar Estudiante</button>
+                <button class="btn btn_2" id="btnEliminar">Limpiar Formulario</button>
+                <span class="mensaje">Los campos con * son obligatorios</span>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <h3>Estudiantes</h3>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Email</th>
+                            <th>Carrera</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-estudiantes">
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No hay estudiantes registrados</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p class="footer-note">Use el buscador para filtrar rápidamente los registros.</p>
+    </div>
+    <script>
+        let students = [];
+        let nextNumber = 1;
+
+        const nombreInput = document.getElementById('nombre');
+        const apellidoInput = document.getElementById('apellido');  
+        const edadInput = document.getElementById('edad');
+        const emailInput = document.getElementById('email');
+        const carreraInput = document.getElementById('carrera');
+        const tablaEstudiantes = document.getElementById('tabla-estudiantes');
+        const contadorEstudiantes = document.getElementById('contador-estudiantes');
+        const btnAgregar = document.getElementById('btnAgregar');
+        const btnEliminar = document.getElementById('btnEliminar');
+        
+        const labelNombre = document.getElementById('label-nombre');
+        const labelApellido = document.getElementById('label-apellido');
+        const labelEmail = document.getElementById('label-email');
+
+        //limpiar formulario
+        btnEliminar.addEventListener('click', limpiarFormulario);
+        function limpiarFormulario(){
+            nombreInput.value = '';
+            apellidoInput.value = '';
+            edadInput.value = '';
+            emailInput.value = '';
+            carreraInput.value = '--Seleccione una carrera--';
+            btnAgregar.textContent = 'Agregar Estudiante';
+            
+            labelNombre.innerHTML = 'Nombre:';
+            labelApellido.innerHTML = 'Apellido:';
+            labelEmail.innerHTML = 'Email:';
+        }
+        
+        // Agregar estudiante
+        btnAgregar.addEventListener('click', agregarEstudiante);
+        function agregarEstudiante(){
+            const nombre = nombreInput.value.trim();
+            const apellido = apellidoInput.value.trim();
+            const edad = parseInt(edadInput.value.trim());
+            const email = emailInput.value.trim();
+            const carrera = carreraInput.value;
+            
+            labelNombre.innerHTML = 'Nombre:';
+            labelApellido.innerHTML = 'Apellido:';
+            labelEmail.innerHTML = 'Email:';
+            
+            if (!nombre || !apellido || !email){
+                alert('Por favor, llene los campos obligatorios.');
+                
+                if (!nombre) {
+                    labelNombre.innerHTML = 'Nombre: <span style="color: #ef4444; font-weight: bold;">*</span>';
+                }
+                if (!apellido) {
+                    labelApellido.innerHTML = 'Apellido: <span style="color: #ef4444; font-weight: bold;">*</span>';
+                }
+                if (!email) {
+                    labelEmail.innerHTML = 'Email: <span style="color: #ef4444; font-weight: bold;">*</span>';
+                }
+                return;
+            }
+            const estudiante={
+                id:Date.now(),
+                number: nextNumber++,nombre,apellido,edad,email,carrera};
+            students.push(estudiante);
+            limpiarFormulario();
+            renderTabla();
+        }
+
+        //eliminar estudiante
+        function eliminarEstudiante(id){
+            students = students.filter(student => student.id !== id);
+            renderTabla();
+        }
+
+        //cargar tabla
+        function renderTabla(){
+            if(students.length === 0){
+                tablaEstudiantes.innerHTML = '<tr><td colspan="7" style="text-align: center;"> No hay estudiantes registrados</td></tr>';
+                return; 
+            }
+
+            tablaEstudiantes.innerHTML = students.map(student => `
+            <tr>
+                <td>${student.number}</td>
+                <td>${student.nombre}</td>
+                <td>${student.apellido}</td>
+                <td>${student.edad || ''}</td>
+                <td>${student.email}</td>
+                <td>${student.carrera}</td>
+                <td>
+                    <button class="btn btn-delete" onclick="eliminarEstudiante(${student.id})">Eliminar</button>
+                </td>
+            </tr>
+            `).join('');
+
+            contadorEstudiantes.textContent = `${students.length} Estudiantes`;
+        }
+    </script>
+</body>
+</html>

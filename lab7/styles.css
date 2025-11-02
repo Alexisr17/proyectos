@@ -1,0 +1,257 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1f3a 0%, #2d3561 50%, #1a1f3a 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #e0e0e0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: #1e2440;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #2d3561;
+}
+
+.header h1 {
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contador-estudiantes {
+    background-color: #22c55e;
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.formulario {
+    background-color: #252b47;
+    padding: 28px;
+    border-radius: 10px;
+    margin-bottom: 35px;
+}
+
+.formulario h2 {
+    margin-bottom: 22px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.campos {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.campos label {
+    margin-bottom: 6px;
+    color: #9ca3af;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.campos input,
+.campos select {
+    padding: 11px 14px;
+    border: 1px solid #374151;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #1e2440;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.campos input::placeholder {
+    color: #6b7280;
+}
+
+.campos input:focus,
+.campos select:focus {
+    outline: none;
+    border-color: #22c55e;
+    background-color: #252b47;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+.campos select {
+    cursor: pointer;
+}
+
+.forms-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn_1 {
+    background-color: #22c55e;
+    color: #ffffff;
+}
+
+.btn_1:hover {
+    background-color: #16a34a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.btn_2 {
+    background-color: #374151;
+    color: #e0e0e0;
+}
+
+.btn_2:hover {
+    background-color: #4b5563;
+    transform: translateY(-2px);
+}
+
+.mensaje {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.table-section {
+    margin-top: 35px;
+}
+
+.table-section h3 {
+    margin-bottom: 18px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.table-container {
+    background-color: #252b47;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #1e2440;
+}
+
+thead th {
+    color: #9ca3af;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #374151;
+}
+
+tbody tr {
+    border-bottom: 1px solid #2d3561;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: #2d3561;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody td {
+    color: #e0e0e0;
+    padding: 14px 16px;
+    font-size: 14px;
+}
+
+.footer-note {
+    text-align: center;
+    margin-top: 24px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit {
+    background-color: #3b82f6;
+    color: white;
+    padding: 7px 14px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background-color: #ef4444;
+    color: white;
+    padding: 7px 14px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-delete:hover {
+    background-color: #dc2626;
+    transform: translateY(-1px);
+}
+
+.no-results {
+    text-align: center;
+    color: #6b7280;
+    padding: 24px;
+    font-size: 14px;
+}
