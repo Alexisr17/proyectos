@@ -15,35 +15,28 @@
 
         <div class="formulario">
             <h2>Formulario estudiante</h2>
-            <div class="campos">
-                <label for="nombre" id="label-nombre">Nombre:</label>
-                <input type="text" id="nombre" placeholder="Ingrese el nombre">
-            </div>
+            <div class="form-grid">
+                <div class="campos">
+                    <label for="nombre" id="label-nombre">Nombre:</label>
+                    <input type="text" id="nombre" placeholder="Ingrese el nombre">
+                </div>
 
-            <div class="campos">
-                <label for="apellido" id="label-apellido">Apellido:</label>
-                <input type="text" id="apellido" placeholder="Ingrese el apellido" required>
-            </div>
 
-            <div class="campos">
-                <label for="edad">Edad:</label>
-                <input type="number" id="edad" placeholder="Ingrese la edad" required>
-            </div>
-            
-            <div class="campos">
-                <label for="email" id="label-email">Email:</label>
-                <input type="email" id="email" placeholder="Ingrese el email" required>
-            </div>
+                    <label for="email" id="label-email">Email:</label>
+                    <input type="email" id="email" placeholder="Ingrese el email" required>
+                    <label for="edad">Edad:</label>
+                    <input type="number" id="edad" placeholder="Ingrese la edad" required>
 
-            <div class="campos">
-                <label for="carrera">Carrera:</label>
-                <select id="carrera">
-                    <option value="Ingeniería en sistemas">Ingeniería en sistemas</option>
-                    <option value="ingeniero industrial">Ingeniero industrial</option>
-                    <option value="Derecho">Derecho</option>
-                    <option value="Arquitectura">Arquitectura</option>
-                    <option value="Psicología">Psicología</option>
-                </select>
+                <div class="campos">
+                    <label for="carrera">Carrera:</label>
+                    <select id="carrera">
+                        <option value="Ingeniería en sistemas">Ingeniería en sistemas</option>
+                        <option value="ingeniero industrial">Ingeniero industrial</option>
+                        <option value="Derecho">Derecho</option>
+                        <option value="Arquitectura">Arquitectura</option>
+                        <option value="Psicología">Psicología</option>
+                    </select>
+                </div>
             </div>
 
             <div class="forms-actions">
@@ -72,7 +65,7 @@
                     </thead>
                     <tbody id="tabla-estudiantes">
                         <tr>
-                            <td colspan="6" style="text-align: center;">No hay estudiantes registrados</td>
+                            <td colspan="7" style="text-align: center;">No hay estudiantes registrados</td>
                         </tr>
                     </tbody>
                 </table>
@@ -106,7 +99,7 @@
             apellidoInput.value = '';
             edadInput.value = '';
             emailInput.value = '';
-            carreraInput.value = '--Seleccione una carrera--';
+            carreraInput.value = 'Ingeniería en sistemas';
             btnAgregar.textContent = 'Agregar Estudiante';
             
             labelNombre.innerHTML = 'Nombre:';
@@ -141,6 +134,11 @@
                 }
                 return;
             }
+            if(edadInput.value < 18 || edadInput.value > 100){
+                alert('La edad debe estar entre 18 y 100 años.');
+                return;
+            }
+
             const estudiante={
                 id:Date.now(),
                 number: nextNumber++,nombre,apellido,edad,email,carrera};
@@ -159,6 +157,7 @@
         function renderTabla(){
             if(students.length === 0){
                 tablaEstudiantes.innerHTML = '<tr><td colspan="7" style="text-align: center;"> No hay estudiantes registrados</td></tr>';
+                contadorEstudiantes.textContent = '0 Estudiantes';
                 return; 
             }
 
